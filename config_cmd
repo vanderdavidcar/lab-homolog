@@ -1,0 +1,5 @@
+username cisco privilege 15 password cisco
+username teste1 privilege 15 password teste1
+username teste2 privilege 15 password teste2
+username teste3 privilege 15 password teste3
+username teste4 privilege 15 password teste4

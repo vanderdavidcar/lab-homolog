@@ -1,0 +1,17 @@
+---
+# vars file for jinja2
+  bkp:
+  - user: backup
+    pass: backup
+  lab:
+  - user: vanderson
+    pass: cisco
+
+  devices:
+  - switch: S1
+  - switch: S2
+  - switch: S3
+  - switch: S4
+  - switch: S5
+  - switch: S6
+  - routers: R4

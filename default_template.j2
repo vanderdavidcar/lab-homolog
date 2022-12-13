@@ -1,0 +1,44 @@
+!
+no ntp server 192.168.122.248
+no ntp server 5.4.6.2
+!
+vtp mode transparent
+!
+no ip domain-lookup
+ip domain-name udemy
+!
+spanning-tree mode rapid-pvst
+!
+!         
+banner motd ^C************************************************************
+THIS IS VANDERSON LAB ENVIRONMENT - DO NOT MAKE CHANGES UNLESS AUTHORIZED
+*************************************************************************^C
+!
+line con 0
+ logging synchronous
+!
+line vty 0 4
+{% for lab in lab %}
+password {{ lab.pass }}
+{% endfor %}
+!
+ login local
+ transport input ssh
+!
+ntp server 192.168.122.1
+!
+alias exec show-startup-config show startup-config
+!
+privilege exec all level 7 show running-config view full
+privilege exec level 7 terminal length 0
+privilege exec level 7 show version
+privilege exec level 7 show inventory
+privilege exec level 7 show startup-config
+privilege exec all level 7 show running-config
+privilege exec level 7 show
+!
+!
+{% for bkp in bkp %}
+username {{ bkp.user }} privilege 7 password {{ bkp.pass }}
+{% endfor %}
+!
