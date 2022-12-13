@@ -4,9 +4,6 @@ from jinja2 import Environment, FileSystemLoader
 #Import YAML from PyYAML
 import yaml
 
-# List to do loop 
-versions = ["ios"]
-
 with open("devices")as f:
     devices_list = f.read().splitlines()
 
