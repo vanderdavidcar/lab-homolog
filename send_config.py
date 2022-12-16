@@ -25,9 +25,9 @@ for devices in devices_list:
     net_connect = ConnectHandler(**iosv)
     print()
     
-    command1 = net_connect.send_config_from_file(f'config_default.cfg')
+    #command1 = net_connect.send_config_from_file(f'config_default.cfg')
     print("--------------- APPLIED CONFIG ---------------")
-    print(command1)
+    #print(command1)
     print("")
     print("--------------- POST CONFIG ---------------")
     command2 = net_connect.send_command("show run | in username")

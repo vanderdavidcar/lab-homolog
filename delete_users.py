@@ -1,11 +1,12 @@
 from netmiko import ConnectHandler
 import net_conn
+import re
 
 with open("devices") as f:
     lines = f.read().splitlines()
 print(lines)
 
-# List of only user must be in devices 
+# List of users must be in devices 
 users = ["vanderson", "backup"]
 
 # Netmiko devices conection
