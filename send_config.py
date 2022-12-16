@@ -30,7 +30,7 @@ for devices in devices_list:
     #print(command1)
     print("")
     print("--------------- POST CONFIG ---------------")
-    command2 = net_connect.send_command("show run | in username")
+    command2 = net_connect.send_command("show run | in domain")
     print(command2)
     print("")
     end_time = datetime.now()

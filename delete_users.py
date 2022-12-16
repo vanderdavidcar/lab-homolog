@@ -18,23 +18,29 @@ for devices in lines:
 
     # Show usernames on devices
     show_cmd = net_connect.send_command("sh run | in username")
-    cmd_split = show_cmd.split()
-    # Split only users in cmd_split find out exatly index in each 7 value
-    output_users = cmd_split[1::7]
-    print(output_users)
+    
+    # Regex pattern to looking for usernames
+    usr_del_pattern = re.compile(r"username (?P<username>\S+)")
+    urs_match = usr_del_pattern.search(show_cmd)
+    usr = re.findall(usr_del_pattern, show_cmd)
+
+    # Regex pattern to looking for username and privilege level
+    users_pattern = re.compile(r"username (?P<username>\w.+) privilege (?P<prv_lvl>\d{1,2})")
+    users_match = users_pattern.search(show_cmd)
+    usr_priv = re.findall(users_pattern, show_cmd)
 
     # Variable without value
     new_users = []
 
     # Find users that doesn't match with variable users
-    for usrs in output_users:
+    for usrs in usr:
         if usrs not in users:
             new_users.append(usrs)
 
     # Create a new list of users that will be removed
     new_list = new_users
 
-    print(f"Updated List with users that will be removed = {new_users}")
+    print(f"Updated users list will be removed = {new_users}")
 
     # Loop to remove users
     for i in new_list:
