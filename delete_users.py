@@ -43,7 +43,7 @@ for devices in lines:
 
     print(f"Updated users list will be removed = {new_users}\n")
 
-    # Loop to remove users
+    # Looping to remove undesirable users
     for i in new_list:
         print(f"-------- POST CONFIGURATION --------\n")
         print(i)
@@ -53,7 +53,7 @@ for devices in lines:
         print(delete_cmd)
         print()
 
-    # Show users after removed list
+    # Show users on devices after removed list
     show_cmd = net_connect.send_command(f"sh run | in username")
     print(f"-------- AFTER CONFIGURATION --------\n")
     print(f"Users and privilege level configured in devices now\n")
