@@ -1,6 +1,5 @@
 from netmiko import ConnectHandler
 import net_conn
-from get_user_priv_lvl import get_user_priv_lvl
 
 with open("devices") as f:
     lines = f.read().splitlines()

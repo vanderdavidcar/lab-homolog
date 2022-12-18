@@ -14,12 +14,18 @@ def get_user_priv_lvl(hosts):
         
         # Show usernames on devices
         show_cmd = net_connect.send_command("sh run | in username")
-        # Regex patternto users and priv_lvl
-        users_pattern = re.compile(r"username (?P<username>\w.+) privilege (?P<prv_lvl>\d{1,2})")
+        
+        # Regex pattern to users
+        users_pattern = re.compile(r"username (?P<username>\S+)")
         users_match = users_pattern.search(show_cmd)
-        list = re.findall(users_pattern, show_cmd)
+        user_list = re.findall(users_pattern, show_cmd)
 
-        for i in list:
+        # Regex pattern to users and priv_lvl
+        users_priv_pattern = re.compile(r"username (?P<username>\w.+) privilege (?P<prv_lvl>\d{1,2})")
+        users_match = users_priv_pattern.search(show_cmd)
+        user_priv_list = re.findall(users_priv_pattern, show_cmd)
+
+        for i in user_priv_list:
             print(f"Users and Priv-Level".ljust(18) + ": " + str(i))
         
 get_user_priv_lvl(hosts)
