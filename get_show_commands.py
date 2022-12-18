@@ -1,6 +1,5 @@
 from netmiko import ConnectHandler
 import net_conn
-import re
 
 with open("devices") as f:
     hosts = f.read().splitlines()
