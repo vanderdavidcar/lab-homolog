@@ -8,13 +8,12 @@ with open("devices") as f:
 def get_user_priv_lvl(hosts):
     for devices in hosts:
         iosv = net_conn.netmiko_connection(devices)
-        print(f"\n{'#'*78}\nConnecting to device model: {str(devices)}\n")
+        print(f"\n{'-'*78}\nConnecting to device model: {str(devices)}\n")
         # A variable "default_enter" has a press enter to confirm users delete
         net_connect = ConnectHandler(**iosv, default_enter="\r\n")
         
         # Show usernames on devices
         show_cmd = net_connect.send_command("sh run | in username")
-
         # Regex patternto users and priv_lvl
         users_pattern = re.compile(r"username (?P<username>\w.+) privilege (?P<prv_lvl>\d{1,2})")
         users_match = users_pattern.search(show_cmd)
@@ -22,17 +21,5 @@ def get_user_priv_lvl(hosts):
 
         for i in list:
             print(f"Users and Priv-Level".ljust(18) + ": " + str(i))
-
-def get_show_commands(hosts):
-    for devices in hosts:
-        iosv = net_conn.netmiko_connection(devices)
-        print(f"\n{'#'*78}\nConnecting to device model: {str(devices)}\n")
-        # A variable "default_enter" has a press enter to confirm users delete
-        net_connect = ConnectHandler(**iosv, default_enter="\r\n")
         
-        # Show usernames on devices
-        show_ip = net_connect.send_command("sh ip int brief | ex una")
-        
-        print(show_ip)
-
 get_user_priv_lvl(hosts)
