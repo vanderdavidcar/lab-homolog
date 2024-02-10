@@ -1,0 +1,12 @@
+---
+- name: Add Loopback Playbook
+  hosts: routers
+  gather_facts: false
+  connection: local
+
+  tasks:
+    - name: Add Loopback Interface
+      debug:
+        msg: "ip address for {{ inventory_hostname }} is {{ address }}"
+      vars:
+        address: "10.0.0.{{groups.routers.index(inventory_hostname)+1}}"

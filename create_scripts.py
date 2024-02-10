@@ -17,7 +17,8 @@ def create_scripts():
     for i in devices_list:
         template = env.get_template(f'default_template.j2')
         output = template.render(config)
-        scriptFile = open(f'config_default.cfg', "w+")
+        #scriptFile = open(f'config_default.cfg', "w+")
+        scriptFile = open(f'config_ospf.cfg', "w+")
         scriptFile.write(output)
         print(f'Created script FileName config_default.cfg')
         print(output)

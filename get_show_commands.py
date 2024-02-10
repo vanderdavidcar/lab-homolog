@@ -1,5 +1,6 @@
 from netmiko import ConnectHandler
 import net_conn
+from pprint import pprint
 
 with open("devices") as f:
     hosts = f.read().splitlines()
@@ -11,11 +12,26 @@ def get_show_commands(hosts):
         # A variable "default_enter" has a press enter to confirm users delete
         net_connect = ConnectHandler(**iosv, default_enter="\r\n")
         
+        # Send commands
+        #cmd = net_connect.send_config_from_file("config_ospf.cfg")        
+        #print(cmd)
+
         # Show usernames on devices
-        show_ip = net_connect.send_command("sh ip int brief | ex una")
-        show_vlan = net_connect.send_command("sh vlan brief")
-        show_route = net_connect.send_command("sh ip route")
+        show_ip = net_connect.send_command("sh ip int brief | ex una",use_genie=True)
+        pprint(show_ip)
 
-        print(show_ip,show_route,show_vlan)
+        show_vlan = net_connect.send_command("sh vlan brief",use_genie=True)
+        pprint(show_vlan)
 
+        show_route = net_connect.send_command("sh ip route",use_genie=True)
+        pprint(show_route)
+
+        show_ospf = net_connect.send_command("sh ip ospf neigh",use_genie=True)
+        pprint(show_ospf)
+
+        show_bgp = net_connect.send_command("sh ip bgp summ",)
+        pprint(show_bgp)
+        #print(show_ip,show_vlan,show_route,show_ospf)
+        
+        
 get_show_commands(hosts)
