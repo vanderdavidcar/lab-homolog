@@ -20,12 +20,12 @@ def send_config(devices_list):
         print('Connecting to device:  ' + devices)
         net_connect = ConnectHandler(**iosv)
     
-        command1 = net_connect.send_config_from_file(f'config_default.cfg')
+        command1 = net_connect.send_config_from_file(f'config_vlans.cfg')
         print("--------------- APPLIED CONFIG ---------------\n")
         print(command1)
-        print("--------------- POST CONFIG ---------------\n")
-        command2 = net_connect.send_command("show run | in username")
-        print(command2)
+        #print("--------------- POST CONFIG ---------------\n")
+        #command2 = net_connect.send_command("show etherchannel summary")
+        #print(command2)
 
         end_time = datetime.now()
         print("Total time: {}".format(end_time - start_time))

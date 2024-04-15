@@ -17,21 +17,24 @@ def get_show_commands(hosts):
         #print(cmd)
 
         # Show usernames on devices
-        show_ip = net_connect.send_command("sh ip int brief | ex una",use_genie=True)
-        pprint(show_ip)
+        show_trunk = net_connect.send_command("clear ip ospf process")
+        print(show_trunk)
 
-        show_vlan = net_connect.send_command("sh vlan brief",use_genie=True)
-        pprint(show_vlan)
-
-        show_route = net_connect.send_command("sh ip route",use_genie=True)
-        pprint(show_route)
-
-        show_ospf = net_connect.send_command("sh ip ospf neigh",use_genie=True)
-        pprint(show_ospf)
-
-        show_bgp = net_connect.send_command("sh ip bgp summ",)
-        pprint(show_bgp)
-        #print(show_ip,show_vlan,show_route,show_ospf)
+        #show_ip = net_connect.send_command("sh ip int brief | ex una",use_genie=True)
+        #print(show_ip)
+#
+        #show_vlan = net_connect.send_command("sh vlan brief",use_genie=True)
+        #print(show_vlan)
+#
+        #show_route = net_connect.send_command("sh ip route",use_genie=True)
+        #print(show_route)
+#
+        #show_ospf = net_connect.send_command("sh ip ospf neigh",use_genie=True)
+        #print(show_ospf)
+#
+        #show_bgp = net_connect.send_command("sh ip bgp summ",)
+        #print(show_bgp)
+        ##print(show_ip,show_vlan,show_route,show_ospf)
         
         
 get_show_commands(hosts)
