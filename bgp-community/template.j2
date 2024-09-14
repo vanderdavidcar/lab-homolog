@@ -1,0 +1,139 @@
+
+=================================================
+{{ hostname }}
+=================================================
+
+nv overlay evpn
+feature nv overlay
+
+------------------------- Criar uma nova interface loopback para BGP -------------------------
+
+int lo1
+  description iBGP
+{% for L3_interfaces in L3_interfaces %}
+  ip address {{L3_interfaces['ip_add']}}/{{L3_interfaces['mask']}}
+{% endfor %}
+  ip router ospf 1 area 0.0.0.0
+
+------------------------- Remover e reconfigurar processo BGP -------------------------
+
+no router bgp 65064
+
+router bgp {{ asn }}
+   router-id {{ rid }}
+   address-family ipv4 unicast
+   address-family l2vpn evpn
+    retain route-target all
+{% for ebgp_neighbors in ebgp_neighbors %}
+ neighbor {{ ebgp_neighbors['neighbor']}}
+ remote-as {{ ebgp_neighbors['remote_as'] }}
+    password {{ebgp_neighbors['secret']}}
+    update-source loopback1
+    ebgp-multihop 2
+    address-family l2vpn evpn
+      allowas-in 3
+      send-community extended
+      prefix-list to_spine_edge out
+      rewrite-evpn-rt-asn
+{% endfor %}
+{% for ibgp_neighbors in ibgp_neighbors %}
+ neighbor {{ ibgp_neighbors['neighbor']}}
+    remote-as  {{ ibgp_neighbors['remote_as'] }}
+    password  {{ibgp_neighbors['secret']}}
+{% endfor %}
+{% for L3_interfaces in L3_interfaces %}
+  update-source {{L3_interfaces['interface']}}
+{% endfor %}
+    address-family l2vpn evpn
+      allowas-in 3
+      send-community extended
+
+------------------------- Criar mac-add virtual -------------------------
+
+fabric forwarding anycast-gateway-mac 0021.0021.0021
+
+------------------------- L3VNI -------------------------
+
+{% for L3VNI in L3VNI %}
+ vlan  {{ L3VNI['vlan_id']}}
+ name {{ L3VNI['vlan_name']}}
+ vn-segment {{ L3VNI['vlan_id']}}000
+{% endfor %}
+
+vrf context PROJETO_EDGE
+{% for L3VNI in L3VNI %}
+  vni {{L3VNI['vni']}}
+{% endfor %}
+  rd auto
+  address-family ipv4 unicast
+    route-target both auto
+    route-target both auto evpn
+
+{% for L3VNI in L3VNI %}
+interface Vlan{{L3VNI['vlan_id']}}
+{% endfor %}
+  description L3-VNI-for-VRF-PROJECT-Routing
+  no shutdown
+  vrf member PROJETO
+  no ip redirects
+  ip forward
+  no ipv6 redirects
+
+------------------------- L2VNI -------------------------
+
+{% for L2VNI in L2VNI %}
+ vlan  {{ L2VNI['vlan_id']}}
+ name {{ L2VNI['vlan_name']}}
+ vn-segment 1600{{ L2VNI['vlan_id']}}
+{% endfor %}
+
+
+{% for L2VNI in L2VNI %}
+no interface Vlan{{ L2VNI['vlan_id']}}
+
+interface Vlan {{ L2VNI['vlan_id'] }}
+  no shutdown
+  vrf member PROJETO_EDGE
+  no ip redirects
+  ip address {{L2VNI['ip_add']}}/{{L2VNI['mask']}}
+  no ipv6 redirects
+  fabric forwarding mode anycast-gateway
+
+{% endfor %}
+
+interface loopback0
+  description VTEP-{{ hostname }}
+
+------------------------- VTEP GATEWAY -------------------------
+
+no int nve1 
+
+interface nve1
+  no shutdown
+  host-reachability protocol bgp
+  source-interface loopback0
+  source-interface hold-down-time 360
+{% for L2VNI in L2VNI %}
+  member vni 1600{{L2VNI['vlan_id']}}
+    suppress-arp
+    ingress-replication protocol bgp
+{% endfor %}
+  member vni 2121000 associate-vrf
+
+------------------------- EVPN -------------------------
+
+evpn
+{% for L2VNI in L2VNI %}
+  vni 1600{{L2VNI['vlan_id']}} l2
+    rd auto
+    route-target import auto
+    route-target export auto
+{% endfor %}
+
+------------------------- VLANS -------------------------
+
+{% for L2VNI in L2VNI %}
+  vlan {{ L2VNI['vlan_id'] }}
+  name {{ L2VNI['vlan_name'] }}
+  vn-segment 1600{{ L2VNI['vlan_id'] }}
+{% endfor %}

@@ -26,5 +26,5 @@ for ip in lines:
     print(output)
 
     # Store backup files on specific folder created by "date.today()"
-    backupFile = open(f"/home/chetos/projetos-git/lab-homolog/bgp-community/{date.today()}/{ip}.cfg", "w+")
+    backupFile = open(f"/home/chetos/projetos-git/lab-homolog/bgp-community/{date.today()}/{ip}_community.cfg", "w+")
     backupFile.write(output)
