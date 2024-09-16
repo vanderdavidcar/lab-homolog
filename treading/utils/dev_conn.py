@@ -2,9 +2,6 @@
 Function Netmiko Connection
 """
 # General Imports
-import json
-from netmiko import ConnectHandler
-from netmiko.exceptions import NetMikoTimeoutException, NetMikoAuthenticationException
 from jinja2 import Environment, FileSystemLoader
 
 # Jinja2 Enviroment
@@ -16,8 +13,8 @@ load_dotenv()
 import os
 
 
-user_lab = os.getenv("USER_LAB")
-pass_lab = os.getenv("PASS_LAB")
+user_lab = os.getenv("USERNAME")
+pass_lab = os.getenv("PASSWORD")
 
 # Netmiko Connection (nxos, ios, iosxr)
 def netmiko_connection(ip):
