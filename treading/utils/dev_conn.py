@@ -23,4 +23,6 @@ def netmiko_connection(ip):
             'ip': ip,
             'username': user_lab,
             'password': pass_lab,
+            "global_delay_factor": 4,
+            "fast_cli": False,
              }

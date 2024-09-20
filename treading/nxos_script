@@ -1,0 +1,19 @@
+username latitudesh password 21M03t@oB8~06 role network-admin 
+snmp-server user latitudesh network-admin auth md5 0xa9d6a823960c66e188c21425e2d106ee priv 0xa9d6a823960c66e188c21425e2d106ee localizedkey
+snmp-server community latitudesh group network-admin
+
+banner login #
+UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED!!
+
+  _            _______ _____ _______ _    _ _____  ______    _____ _    _ 
+ | |        /\|__   __|_   _|__   __| |  | |  __ \|  ____|  / ____| |  | |
+ | |       /  \  | |    | |    | |  | |  | | |  | | |__    | (___ | |__| |
+ | |      / /\ \ | |    | |    | |  | |  | | |  | |  __|    \___ \|  __  |
+ | |____ / ____ \| |   _| |_   | |  | |__| | |__| | |____ _ ____) | |  | |
+ |______/_/    \_\_|  |_____|  |_|   \____/|_____/|______(_)_____/|_|  |_|
+ 
+You must have explicit, authorized permission to access or configure this device.
+Unauthorized attempts and actions to access or use this system may result in civil and/or criminal penalties.
+All activities performed on this device are logged and monitored.
+Please, contact <email> to gain access to this equipment if you need authorization. 
+ #

@@ -1,0 +1,6 @@
+set system login user latitudesh uid 2010
+set system login user latitudesh class super-user
+set system login user latitudesh authentication encrypted-password "$6$XJ68YwAm$0WKqjkVymZ0Pg1xDQysMW6.zxU0nvqO.3GZ1qSSe934EmK.q/QAz7q..UXK9Tn4kWDLLSFL1ei4NFpKbzrIdc0"
+
+
+set system login message "UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED!!\n  _            _______ _____ _______ _    _ _____  ______    _____ _    _ \n | |        /\\|__   __|_   _|__   __| |  | |  __ \\|  ____|  / ____| |  | |\n | |       /  \\  | |    | |    | |  | |  | | |  | | |__    | (___ | |__| |\n | |      / /\\ \\ | |    | |    | |  | |  | | |  | |  __|    \\___ \\|  __  |\n | |____ / ____ \\| |   _| |_   | |  | |__| | |__| | |____ _ ____) | |  | |\n |______/_/    \\_\\_|  |_____|  |_|   \\____/|_____/|______(_)_____/|_|  |_|\n                                                                          \nYou must have explicit, authorized permission to access or configure this device.\nUnauthorized attempts and actions to access or use this system may result in civil and/or criminal penalties.\nAll activities performed on this device are logged and monitored.\nPlease, contact networkops@latitude.sh to gain access to this equipment if you need authorization.\n"
