@@ -1,4 +1,1 @@
 {'name': 'R4', 'error': NetmikoTimeoutException('DNS failure--the hostname you provided was not resolvable in DNS: R4:22')}
-{'name': 'R4', 'error': NetmikoTimeoutException('DNS failure--the hostname you provided was not resolvable in DNS: R4:22')}
-{'name': 'R4', 'error': NetmikoTimeoutException('DNS failure--the hostname you provided was not resolvable in DNS: R4:22')}
-{'name': 'R4', 'error': NetmikoTimeoutException('DNS failure--the hostname you provided was not resolvable in DNS: R4:22')}
